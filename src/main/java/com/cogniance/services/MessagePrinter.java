@@ -1,13 +1,13 @@
 package com.cogniance.services;
 
 import org.springframework.integration.annotation.ServiceActivator;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class MessagePrinter {
 
-    @ServiceActivator(inputChannel = "sampleChannel")
-    public void printResponse(String response){
+    @ServiceActivator(inputChannel = "printChannel")
+    public void printResponse(String response) {
         System.out.println(response);
     }
 
