@@ -4,4 +4,4 @@ logging:
     com.cadreon: DEBUG
   file: tmp/logs/campaign-management.log
 
-job.frequency: 20000
+job.frequency: 2000

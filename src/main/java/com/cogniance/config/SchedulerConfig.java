@@ -7,7 +7,6 @@ import org.quartz.Trigger;
 import org.quartz.spi.JobFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class SchedulerConfig {
     private static SimpleTriggerFactoryBean createTrigger(JobDetail jobDetail, long pollFrequencyMs) {
         SimpleTriggerFactoryBean factoryBean = new SimpleTriggerFactoryBean();
         factoryBean.setJobDetail(jobDetail);
-        factoryBean.setStartDelay(30*1000L);
+        factoryBean.setStartDelay(3 * 1000L);
         factoryBean.setRepeatInterval(pollFrequencyMs);
         factoryBean.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
         // in case of misfire, ignore all missed triggers and continue :
@@ -72,8 +71,7 @@ public class SchedulerConfig {
     }
 
     @Bean
-    public SimpleTriggerFactoryBean jobTrigger(JobDetail jobDetail,
-                                               @Value("${job.frequency}") long frequency) {
+    public SimpleTriggerFactoryBean jobTrigger(JobDetail jobDetail, @Value("${job.frequency}") long frequency) {
         return createTrigger(jobDetail, frequency);
     }
 
